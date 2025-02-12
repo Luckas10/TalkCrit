@@ -1,0 +1,318 @@
+{% extends "base.html" %}
+
+{% block title %} Perfil {% endblock %}
+
+{% block titlePage %} Perfil {% endblock %}
+
+{% block style %}
+<style>
+    .profile-page {
+        display: flex;
+        width: 100%;
+        height: 100%;
+    }
+
+    .profile-container1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        width: 40%;
+        margin-right: 30px;
+        padding: 2%;
+        background-color: #0d2329;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+        gap: 10px;
+    }
+
+    .profile-container1 h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #FFFFFF;
+    }
+
+    .profile-container1 img {
+        width: 70%; /* Define um tamanho fixo apropriado */
+        height: auto; /* Mantém as proporções */
+        border-radius: 50%; /* Deixa a imagem circular */
+        object-fit: cover; /* Garante que a imagem se ajuste bem ao espaço */
+        border: 3px solid #05664f; /* Opcional: borda para destaque */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Suaviza o visual */
+}
+
+    .profile-info1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .profile-info1 .info-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        color: #FFFFFF;
+    }
+
+    .profile-info1 .info-item p {
+        word-wrap: break-word;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .profile-info1 .info-item i {
+        font-size: 18px;
+    }
+
+    .profile-container2 h1 {
+        color: #0d2329;
+    }
+
+    .profile-container2 {
+        display: flex;
+        flex-direction: column;
+        background-color: #f9f9f9;
+        width: 100%; 
+        max-width: 100%;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+        border-radius: 10px;
+        padding: 20px;
+        gap: 10px;
+        box-sizing: border-box;
+        overflow: hidden; 
+    }
+
+    .profile-info2 {
+        height: 90%;
+        display: flex;
+        flex-wrap: wrap; /* Permite que os itens "quebrem" para a próxima linha */
+        justify-content: space-between; /* Espaço uniforme entre os itens */
+        gap: 10px; /* Espaço entre os itens */
+    }
+
+    .info2-items {
+        display: flex;
+        flex-direction: column; /* Organiza o conteúdo verticalmente */
+        align-items: center;    /* Centraliza horizontalmente */
+        justify-content: center; /* Centraliza verticalmente */
+        text-align: center;     /* Centraliza o texto */
+        width: 100%;
+        min-height: 120px;      /* Define uma altura mínima para todos os itens */
+        border: 2px solid #05664f;
+        background-color: #F9F9F9;
+        padding: 10px;
+        border-radius: 10px;
+        box-sizing: border-box;
+        gap: 5px;
+        flex: 1 1 calc(33.33% - 10px); /* 3 itens por linha por padrão */
+        min-width: 150px; /* Tamanho mínimo pra evitar itens espremidos */
+        max-width: calc(33.33% - 10px); /* Alinha bem com o gap */
+    }
+
+    .info2-buttons {
+        grid-column: span 3;
+        margin-top: 10px;
+        height: 85px;
+        border: 2px solid #05664f;
+        border-radius: 10px;
+        box-sizing: bord
+    }
+
+    .info2-item-text {
+        display: flex;
+        flex-direction: column;
+        font-size: medium;
+        gap: 5px;
+    }
+
+    @media (max-width: 768px) {
+        .profile-page {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-container1 {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .profile-container2 {
+            width: 100%;
+        }
+
+        .profile-info1 .info-item {
+            font-size: 20px;
+        }
+
+        .profile-container1 h2 {
+            font-size: 25px;
+        }
+
+        .info2-items {
+            flex: 1 1 calc(50% - 10px); /* 2 itens por linha */
+            max-width: calc(50% - 10px); /* Ajusta pro gap */
+        }
+
+        .profile-info2 {
+            justify-content: center;
+        }
+
+    }
+        
+    @media (max-width: 480px) {
+        
+        .profile-page {
+            gap: 15px
+        }
+
+        .profile-container1 {
+            width: 90%; 
+            margin: 0 auto;
+            padding: 10px; 
+            gap: 5px; 
+        }
+
+        .profile-info1 .info-item {
+            font-size: 10px;
+        }
+
+        .profile-container1 h2 {
+            font-size: 20px;
+        }
+
+        .profile-container1 img {
+            max-width: 50%;
+            height: auto; 
+        }
+
+        .profile-container2 {
+            width: 90%;
+        }
+
+        .info2-items {
+            flex: 1 1 calc(50% - 10px);
+            max-width: calc(50% - 10px); 
+        }
+
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="profile-page">
+    <div class="profile-page">
+        <div class="profile-container1">
+            <img src="/static/images/avatar.jpg" alt="profile_image">
+            <h2>Perfil do Usuário</h2>
+            <div class="profile-info1">
+                <div class="info-item">
+                    <i class="fas fa-user"></i>
+                    <p>Nome: {{ current_user.name }}</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>Email: {{ current_user.email }}</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p>Data de Registro: {{ current_user.created_at }}</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <p>Telefone: {{ current_user.telephone }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="profile-container2">
+            <h1>Informações</h1>
+            <div class="profile-info2">
+                <!-- Item 1 -->
+                <div class="info2-items">
+                    <div class="fas fa-2x fa-hand-holding-usd" style="color: #05664f; margin-bottom: 10px;"></div>
+                    <div class="info2-item-text fas " style="color: #05664f;">
+                        <p>Total de dinheiro doado:</p>
+                        <p>R${{ current_user.valueDonations }}</p>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="info2-items">
+                    <div class="fas fa-2x fa-gift" style="color: #05664f; margin-bottom: 10px;"></div>
+                    <div class="info2-item-text fas" style="color: #05664f;">
+                        <p>Total de itens doados:</p>
+                        <p>{{ current_user.itemDonations }}</p>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="info2-items">
+                    <div class="fas fa-2x fa-handshake" style="color: #05664f; margin-bottom: 10px;"></div>
+                    <div class="info2-item-text fas " style="color: #05664f;">
+                        <p>Total de contribuições:</p>
+                        <p>777 contribuições</p>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="info2-items">
+                    <div class="fas fa-2x fa-hand-holding-heart" style="color: #05664f; margin-bottom: 10px;"></div>
+                    <div class="info2-item-text fas " style="color: #05664f;">
+                        <p>Total de campanhas em que participou:</p>
+                        <p>{{ current_user.engagedCampaigns }}</p>
+                    </div>
+                </div>
+                <!-- Item 5 -->
+                <div class="info2-items">
+                    <div class="fas fa-2x fa-users" style="color: #05664f; margin-bottom: 10px;"></div>
+                    <div class="info2-item-text fas " style="color: #05664f;">
+                        <p>Total de campanhas ativas:</p>
+                        <p>777 campanhas</p>
+                    </div>
+                </div>
+                <!-- Item 6 -->
+                <div class="info2-items">
+                    <div class="fas fa-2x fa-clipboard-check" style="color: #05664f; margin-bottom: 10px;"></div>
+                    <div class="info2-item-text fas " style="color: #05664f;">
+                        <p>Maior doação feita:</p>
+                        <p>R$500,00</p>
+                    </div>
+                </div>
+                <!-- Item 7 -->
+                <div class="info2-items">
+                    <div class="fas fa-2x fa-circle-dollar-to-slot" style="color: #05664f; margin-bottom: 10px;"></div>
+                    <div class="info2-item-text fas " style="color: #05664f;">
+                        <p>Contribuição média por campanha:</p>
+                        <p>R$350,00</p>
+                    </div>
+                </div>
+                <!-- Item 8 -->
+                <div class="info2-items">
+                    <div class="fas fa-2x fa-percent" style="color: #05664f; margin-bottom: 10px;"></div>
+                    <div class="info2-item-text fas " style="color: #05664f;">
+                        <p>Porcentagem de doações em dinheiro:</p>
+                        <p>{{ current_user.valuePercentage }}%</p>
+                    </div>
+                </div>
+                <!-- Item 9 -->
+                <div class="info2-items">
+                    <div class="fas fa-2x fa-percent" style="color: #05664f; margin-bottom: 10px;"></div>
+                    <div class="info2-item-text fas " style="color: #05664f;">
+                        <p>Porcentagem de doações em itens:</p>
+                        <p>{{ current_user.itemPercentage }}%</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<script>
+    
+</script>
+{% endblock %}

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TalkCrit | Resenhas de filmes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+</head>
+
+<body>
+
+    <div class="container" id="container">
+        <!-- FORM DE REGISTRO -->
+        <div class="form-container sign-up">
+            <form method="POST">
+                <h1>Crie Sua Conta</h1>
+                <span>Use seu e-mail para se registrar</span>
+
+                <input id="r_name" name="r_name" type="text" placeholder="Nome" required>
+                <!-- Se futuramente quiser erro específico para r_name, exiba aqui -->
+
+                <input id="r_email" name="r_email" type="email" placeholder="E-mail" required>
+                <!-- Label de erro, se existir 'r_email' -->
+                {% if errors.r_email %}
+                <label style="color: red; font-size: 0.9em;">{{ errors.r_email }}</label>
+                {% endif %}
+
+                <input id="r_telefone" name="r_telefone" type="telephone" placeholder="Telefone" required>
+                <!-- Se futuramente quiser erro específico para r_telefone, exiba aqui -->
+
+                <input id="r_password" name="r_password" type="password" placeholder="Senha" required>
+                <!-- Se quiser erro específico para r_password, exiba aqui -->
+
+                <input id="r_confirmpassword" name="r_confirmpassword" type="password" placeholder="Confirme sua senha"
+                    required>
+                {% if errors.r_confirmpassword %}
+                <label style="color: red; font-size: 0.9em;">{{ errors.r_confirmpassword }}</label>
+                {% endif %}
+
+                <input type="hidden" name="action" value="register">
+                <button type="submit">Registrar</button>
+            </form>
+        </div>
+
+        <!-- FORM DE LOGIN -->
+        <div class="form-container sign-in">
+            <form method="POST">
+                <h1>Entrar</h1>
+                <span>Use seu e-mail e senha</span>
+
+                <input id="l_email" name="l_email" type="email" placeholder="E-mail" required>
+                {% if errors.l_email %}
+                <label style="color: red; font-size: 0.9em;">{{ errors.l_email }}</label>
+                {% endif %}
+
+                <input id="l_password" name="l_password" type="password" placeholder="Senha" required>
+                {% if errors.l_password %}
+                <label style="color: red; font-size: 0.9em;">{{ errors.l_password }}</label>
+                {% endif %}
+
+                <input type="hidden" name="action" value="login">
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+
+        <!-- Container do toggle (login/registro) -->
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Bem-vindo de Volta!</h1>
+                    <div class="gif-container">
+                        <img src="{{ url_for('static', filename='images/logo_animada.gif') }}" alt="GIF de boas-vindas">
+                    </div>
+                    <p>Faça login com suas informações para gerenciar suas resenhas ou cometários.</p>
+                    <button class="hidden" id="login">Entrar</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Olá, Amante de filmes e séries!</h1>
+                    <div class="gif-container">
+                        <img src="{{ url_for('static', filename='images/logo_animada.gif') }}" alt="GIF de boas-vindas">
+                    </div>
+                    <p>Crie sua conta e comece a fazer parte da família TalkCrit.</p>
+                    <button class="hidden" id="register">Registrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        // Toggle entre Login e Registro
+        const container = document.getElementById('container');
+        const registerBtn = document.getElementById('register');
+        const loginBtn = document.getElementById('login');
+
+        registerBtn.addEventListener('click', () => {
+            container.classList.add("active");
+        });
+
+        loginBtn.addEventListener('click', () => {
+            container.classList.remove("active");
+        });
+
+        // Validação de senhas no front-end
+        const senha = document.getElementById('r_password');
+        const confirmarsenha = document.getElementById('r_confirmpassword');
+
+        function validarSenhas() {
+            let mensagemErro = '';
+
+            if (senha.value.length < 8) {
+                mensagemErro = 'A senha precisa ter pelo menos 8 caracteres!';
+                senha.setCustomValidity(mensagemErro);
+                senha.classList.add('erroTamanho');
+            } else {
+                senha.setCustomValidity('');
+                senha.classList.remove('erroTamanho');
+            }
+
+            if (confirmarsenha.value && senha.value !== confirmarsenha.value) {
+                mensagemErro = 'As senhas precisam ser iguais!';
+                confirmarsenha.setCustomValidity(mensagemErro);
+                confirmarsenha.classList.add('erroIgualdade');
+            } else {
+                confirmarsenha.setCustomValidity('');
+                confirmarsenha.classList.remove('erroIgualdade');
+            }
+        }
+
+        senha.addEventListener('input', validarSenhas);
+        confirmarsenha.addEventListener('input', validarSenhas);
+    </script>
+
+    <style>
+        /* Exemplo de estilos para inputs em caso de erro local (front-end) */
+        .erroTamanho,
+        .erroIgualdade {
+            outline: 2px solid red;
+            border-radius: 2px;
+        }
+    </style>
+
+</body>
+
+</html>
